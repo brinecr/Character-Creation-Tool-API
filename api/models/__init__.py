@@ -1,2 +1,2 @@
-from .mango import Mango
+from .character import Character
 from .user import User
