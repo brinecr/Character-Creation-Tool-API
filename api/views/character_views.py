@@ -47,7 +47,7 @@ class CharacterDetail(generics.RetrieveUpdateDestroyAPIView):
     def delete(self, request, pk):
         """Delete request"""
         character = get_object_or_404(Character, pk=pk)
-        if not request.user.id == character['owner']:
+        if not request.user == character.owner:
             raise PermissionDenied('Unauthorized, you do not own this character')
         character.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -61,7 +61,7 @@ class CharacterDetail(generics.RetrieveUpdateDestroyAPIView):
         # Locate Character
         character = get_object_or_404(Character, pk=pk)
         # Check if user is  the same
-        if not request.user.id == character['owner']:
+        if not request.user == character.owner:
             raise PermissionDenied('Unauthorized, you do not own this character')
 
         # Add owner to data object now that we know this user owns the resource
