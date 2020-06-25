@@ -64,7 +64,7 @@ On the back-end specifically I could, in the future, add more functionality to t
 ---
 ### ERD (entity relationship diagram)
 
-![](public/Monster_Fighter_Simulator_ERD.png)
+![](public/Monster_Fighter_Simulator_ERD.jpg)
 
 ## Instructions
 Here's the instructions on how to use our API
@@ -120,9 +120,9 @@ These are the data format for the api calls
 | PURPOSE | EXTENSION | VERB | TOKEN REQUIRED | RETURN OBJECT | RETURN STATUS |
 | --- | --- | --- | --- | --- | --- |
 | Create | 'characters/' | 'POST' | YES | Character Object | 201 |
-| Show | 'characters/' + characterid | 'GET' | YES | Character Object | 200 |
-| Update | 'characters/' + characterid | 'PATCH' | YES | user | 204 |
-| Delete | 'characters/' + characterid | 'DELETE' | YES | user | 200 |
+| Read | 'characters/' | 'GET' | YES | Character Object | 200 |
+| Update | 'characters/' + characterid | 'PATCH' | YES | Character Object | 204 |
+| Delete | 'characters/' + characterid | 'DELETE' | YES | Character Object | 200 |
 
 These are the api calls:
 
