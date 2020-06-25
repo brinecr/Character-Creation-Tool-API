@@ -7,11 +7,11 @@ class Character(models.Model):
   # define fields
   # https://docs.djangoproject.com/en/3.0/ref/models/fields/
   name = models.CharField(max_length=100)
-  hit_points = models.IntegerField(default='10', editable=False)
-  attack_power = models.IntegerField(default='4', editable=False)
-  dead = models.BooleanField(default=False, editable=False)
+  hit_points = models.IntegerField(default='10')
+  attack_power = models.IntegerField(default='4')
+  dead = models.BooleanField(default=False)
   description = models.CharField(max_length=100)
-  monsters_killed = models.IntegerField(default='0', editable=False)
+  monsters_killed = models.IntegerField(default='0')
   owner = models.ForeignKey(
       User,
       on_delete=models.CASCADE
