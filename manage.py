@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'monster-fighting-simulator.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'character-creation-tool.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
