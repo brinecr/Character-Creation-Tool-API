@@ -12,9 +12,9 @@ Working within the scope of time (4 days) there was a lot more which I had wishe
 - [Deployed API](https://character-creation-tool.herokuapp.com/)
 - [Deployed Client](https://brinecr.github.io/Character-Creation-Tool-Client/#/)
 
-If you would like to take a look a the admin
+If you would like to take a look a the admin please use the superuser name of test@test.com and pw test.
 
-- [Deployed API](https://character-creation-tool.herokuapp.com/admin)
+- [Deployed API Admin](https://character-creation-tool.herokuapp.com/admin/)
 
 ## Planning Story
 
@@ -35,18 +35,6 @@ What actually happened was more along the lines of:
 1. Tuesday: Front-End Auth - working on getting Auth completed
 1. Wednesday: Front-End - Fleshing out character creation tools and making sure they spoke with the back end
 1.Thursday: Cleaning up buttons and project overall, adding update functionality, completing readme and deployments
-
-### User Stories
-
-1. As an unregistered user i want to be able to sign up for an account.
-1. As a user I would like to be able to create characters!
-1. As a user I would like to make my characters battle monsters!
-1. As a user I would love to see some power-ups available while battling monsters!
-1. As a user I would love to track how well my characters have done!
-1. As a user I would love to be able to revive my characters from the dead!
-1. As a user I want to be able log into my account
-1. As a user I want to be able to sign out
-1. As a user I want to be able to change my password
 
 ### Technologies Used
 
@@ -69,7 +57,7 @@ Originally I had wanted to implement a monster fighting simulator as the program
 
 Taking these basic tools as a combat system I could also flesh out a world to have a character walk around - I like to think of the original Final Fantasy game as a lot of inspiration there as "what could be."
 
-On the back-end specifically I could, in the future, add more functionality to tracking statistics. Things like height, weight, and individual attributes. This would have been a stretch goal but I wanted to keep it simple at first. 
+On the back-end specifically I could, in the future, add more functionality to tracking statistics. Things like height, weight, and individual attributes. This would have been a stretch goal but I wanted to keep it simple at first.
 
 ## Images
 
@@ -77,14 +65,6 @@ On the back-end specifically I could, in the future, add more functionality to t
 ### ERD (entity relationship diagram)
 
 ![](public/Monster_Fighter_Simulator_ERD.png)
-
-#### Wireframe:
-![](public/mfs-landing-page.png)
-![](public/mfs-signed-in-page.png)
-![](public/mfs-create-character.png)
-![](public/mfs-pick-a-character.png)
-![](public/mfs-character-graveyard.png)
-![](public/mfs-battle.png)
 
 ## Instructions
 Here's the instructions on how to use our API
@@ -109,7 +89,6 @@ These are the data format for the api calls
 ```javascript
 {
   "credentials": {
-    "userName": <user>,
     "email": <email>,
     "password": <password>,
     "password_confirmation": <password_confirmation>
@@ -137,53 +116,94 @@ These are the data format for the api calls
 }
 ```
 
-*CHANGE USERNAME*
-```
+**PROFILE**
+| PURPOSE | EXTENSION | VERB | TOKEN REQUIRED | RETURN OBJECT | RETURN STATUS |
+| --- | --- | --- | --- | --- | --- |
+| Create | 'characters/' | 'POST' | YES | Character Object | 201 |
+| Show | 'characters/' + characterid | 'GET' | YES | Character Object | 200 |
+| Update | 'characters/' + characterid | 'PATCH' | YES | user | 204 |
+| Delete | 'characters/' + characterid | 'DELETE' | YES | user | 200 |
+
+These are the api calls:
+
+*CREATE*
+```javascript
+// Create character also has default fields for hit_points, dead, attack_power, and monsters_killed that do not need user input
 {
-  "credentials": {
-    "userName": <user>
+  "character": {
+    "name": <name>
+    "description": <description>
+  }
+}
+
+```
+
+*UPDATE*
+```javascript
+// Heal Character happens on a button press, no other fields/input needed
+{
+  "character": {
+    "hit_points": 10,
+    "dead": false
+    "name": <character name based on ID>
+    "description": <character description based on ID>
+  }
+}
+
+// Kill Character happens on a button press, no other fields/input needed
+{
+  "character": {
+    "hit_points": 0,
+    "dead": True,
+    "name": <character name based on ID>
+    "description": <character description based on ID>
   }
 }
 ```
 
-**PROFILE**
-| PURPOSE | EXTENSION | VERB | TOKEN REQUIRED | RETURN OBJECT | RETURN STATUS |
-| --- | --- | --- | --- | --- | --- |
-| Create | '/profile' | 'POST' | YES | User Object | 201 |
-| Show | '/profile/:id' | 'GET' | NO | User Object | None |
-| Update | '/profile/:id' | 'PATCH' | YES | user | 204 |
-| Reset | '/profile/:id' | 'DELETE' | YES | user | 200 |
+### Set Up and Installation Instructions
 
-These are the data format for the api calls
+Please see Client instructions as well - both the back end API and Front End application need to be loaded and running for the front end to work. You can access the back end through the admin panel instructions at the top of this document.
 
-*CREATE*
-```
-{
-      "user": {
-        "_id": <userID>,
-        "profile": {
-          "about": <about> ,
-          "avatarUrl": <avatarUrl>,
-          "quote": <quote>,
-          "rank": <rank>,
-          "website": <website>
-        }
-      }
-    }
+If you choose to fork/clone this repo please follow these instructions to make sure it is working correctly:
+1. Fork the Repository
+2. Click clone the Repository
+3. Open up your terminal and navigate to the location where you would like to clone the respository
+4. Type `git clone` then copy/paste the link you received from cloning and press enter. This should install the cloned repository.
+5. Enter into the repository by typing `CD Character-Creation-Tool-API` and pressing enter.
+6. At this point you can create a new branch if you would like or continue on the master branch.
+7. Run `pipenv shell` to start up your virtual environment.
+8. Run `pipenv install` to install dependencies.
+9. Open the repository in Atom with `atom .`
+10. Create a psql database for your project
+    1. Type `psql` to get into interactive shell.
+    2. Run `CREATE DATABASE character-creation-tool;`
+11. Create a `.env` file
+    1. Add `ENV=development` to the first line of the .env file.
+    2. Add `DB_NAME_DEV=character-creation-tool` to the second line of the file.
+    3. Generate a secret key using [this tool](https://djecrety.ir) and add it to the `.env` file using the key `SECRET` so it looks like `SECRET=secret_key` on the 3rd line.
+11. Type `python3 manage.py runserver` into the terminal to spin up the API. You should be able to visit it in a browser via http://localhost:8000/ though I recommend the admin link at the top of the document for more minute control.
+
+See below documentation for how the .env file should look and additional python commands.
+
+### The `.env` File
+
+After following the steps above, your `.env` file should look _something_ like
+the following, replacing `project_db_name` with your database name and `secret_key`.
+
+```sh
+ENV=development
+DB_NAME_DEV=character-creation-tool
+SECRET=secret_key
 ```
 
-*UPDATE*
-```
-{
-      "user": {
-        "_id": <userID>,
-        "profile": {
-          "about": <about> ,
-          "avatarUrl": <avatarUrl>,
-          "quote": <quote>,
-          "rank": <rank>,
-          "website": <website>
-        }
-      }
-    }
-```
+## Commands
+
+Commands are run with the syntax `python3 manage.py <command>`:
+
+| command | action |
+|---------|--------|
+| `runserver`  |  Run the server |
+| `makemigrations`  | Generate migration files based on changes to models  |
+| `migrate`  | Run migration files to migrate changes to db  |
+| `startapp`  | Create a new app  |
