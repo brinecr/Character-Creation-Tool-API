@@ -25,7 +25,7 @@ I then put together a tentative schedule:
 1. Monday: Back End Complete + Auth + as much documentation that I can
 1. Tuesday: Front-End
 1. Wednesday: Front-End (make sure front end is talking to back end properly)
-1.Thursday: Make things pretty, clean things up (SCSS, CSS), add extra functionality (more monsters, other attributes to characters)
+1. Thursday: Make things pretty, clean things up (SCSS, CSS), add extra functionality (more monsters, other attributes to characters)
 
 Quickly I learned that making Django work with the React template that I was using needed a bit of work. This really put me behind from the get-go and so I had to tailor the rest of the project accordingly.
 
@@ -34,7 +34,7 @@ What actually happened was more along the lines of:
 1. Monday: Back End Complete
 1. Tuesday: Front-End Auth - working on getting Auth completed
 1. Wednesday: Front-End - Fleshing out character creation tools and making sure they spoke with the back end
-1.Thursday: Cleaning up buttons and project overall, adding update functionality, completing readme and deployments
+1. Thursday: Cleaning up buttons and project overall, adding update functionality, completing readme and deployments
 
 ### Technologies Used
 
